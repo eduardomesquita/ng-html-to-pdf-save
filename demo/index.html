@@ -1,21 +1,31 @@
 <html ng-app="app">
 
 <body ng-controller="DemoController">
-<button pdf-save-button="idOne" pdf-name="someone.pdf" class="btn">Hello Someone</button>
+
+<div pdf-save-content>
+	<button class="btn" ng-click="create()">imprime</button>
+
+<button class="btn">Hello Someone</button>
 	<!-- below block will be saved as pdf -->
 
-	<div pdf-save-content="idOne" >
+	<div>
+		<input ng-model="pdfName">
+	</div>
+
+	<div>
 		<!-- some google graph -->
 		Hello Someone
 	</div>
 
-	<button pdf-save-button="idOneGraph" pdf-name="hello.pdf" class="btn">Hello World</button>
+	<button class="btn">Hello World</button>
 	<!-- below block will be saved as pdf -->
 
-	<div pdf-save-content="idOneGraph" >
+	<div >
 		<!-- some google graph -->
 		Hello World
 	</div>
+
+</div>
 	<script src="../bower_components/angular/angular.js"></script>
 	<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="https://cdn.rawgit.com/niklasvh/html2canvas/0.5.0-alpha2/dist/html2canvas.min.js"></script>
@@ -26,7 +36,13 @@
 </script>
 <script>
 var app = angular.module('app' , ['htmlToPdfSave']) ;
-app.controller('DemoController' , function($scope) {
+app.controller('DemoController' , function($scope, pdfSaveService) {
+
+	pdfSaveService.setConfigure({
+		name: 'teste.pdf'
+	});
+	
+	$scope.create = pdfSaveService.createPdf;
 
 });
 </script>
